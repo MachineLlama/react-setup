@@ -1,0 +1,23 @@
+{
+  "name": "react-setup",
+  "version": "0.0.1",
+  "description": "Setup script for a React app using Sass, Babel, and Webpack",
+  "main": "start.js",
+  "scripts": {
+    "start": "node start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MachineLlama/react-setup.git"
+  },
+  "keywords": [
+    "React",
+    "Webpack",
+    "Sass",
+    "Babel",
+    "Setup"
+  ],
+  "author": "MachineLlama",
+  "license": "MIT",
+  "homepage": "https://github.com/MachineLlama/react-setup#readme"
+}
