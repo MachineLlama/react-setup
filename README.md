@@ -8,7 +8,8 @@ To run: `node start` or `node start <project-name>`
 - The newly created App can be run with `npm run start` (on port 5070 by default)
 
 Default values for setup can be changed in `config.js`:
-```json
+```js
+{
   entryFile: './src/index.js',
   webpack: {
     outputPath: 'dist',
@@ -27,4 +28,5 @@ Default values for setup can be changed in `config.js`:
     repositoryType: 'git',
     repositoryURL: 'repository_url'
   }
+}
 ```
