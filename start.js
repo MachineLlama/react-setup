@@ -6,6 +6,7 @@ const readme = require('./templates/readme');
 const package = require('./templates/package');
 const webpack = require('./templates/webpack');
 const babelrc = require('./templates/babelrc');
+const gitignore = require('./templates/gitignore');
 const indexHtml = require('./templates/public/index-html');
 const app = require('./templates/src/App');
 
@@ -40,6 +41,11 @@ const babelContent = babelrc();
 const babelPath = `${directoryPath}/.babelrc`;
 fs.writeFileSync(babelPath, babelContent);
 
+// .gitignore
+const gitignoreContent = gitignore();
+const gitignorePath = `${directoryPath}/.gitignore`;
+fs.writeFileSync(gitignorePath, gitignoreContent);
+
 // Create public directory and copy files
 fs.mkdirSync(`${directoryPath}/public`);
 
@@ -66,3 +72,4 @@ console.info('\nInstalling dependencies...');
 process.chdir(directoryPath);
 exec('npm install react react-dom --save');
 exec('npm install webpack webpack-cli webpack-dev-server sass-loader css-loader style-loader postcss-loader sass mini-css-extract-plugin html-webpack-plugin @babel/core @babel/preset-env babel-loader @babel/runtime core-js@3 @babel/preset-react --save-dev');
+exec('git init');
