@@ -8,8 +8,9 @@ module.exports = function(name) {
   "main": "${config.entryFile}",
   "scripts": {
     "dev": "webpack --mode development",
-    "build": "webpack --mode production",
-    "start": "webpack serve --mode development"
+    "clean": "rimraf dist",
+    "build": "npm run clean && webpack --mode production",
+    "start": "npm run build && webpack serve --mode development"
   },
   "repository": {
     "type": "${config.package.repositoryType}",

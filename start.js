@@ -8,12 +8,14 @@ const webpack = require('./templates/webpack');
 const babelrc = require('./templates/babelrc');
 const gitignore = require('./templates/gitignore');
 const indexHtml = require('./templates/public/index-html');
+const manifest = require('./templates/public/manifest-json');
+const robots = require('./templates/public/robots-txt');
 const app = require('./templates/src/App');
 
 // arguments
 // 1: directory name, default = config.projectName
 const args = process.argv.slice(2);
-const directoryName = args[0] || config.projectName;
+const directoryName = args[0] || config.package.projectName;
 
 console.info('Creating files...');
 
@@ -54,6 +56,16 @@ const indexHtmlContext = indexHtml(directoryName);
 const indexHtmlPath = `${directoryPath}/public/index.html`;
 fs.writeFileSync(indexHtmlPath, indexHtmlContext);
 
+// public/manifest.json
+const manifestContent = manifest();
+const manifestPath = `${directoryPath}/public/manifest.json`;
+fs.writeFileSync(manifestPath, manifestContent);
+
+// public/robots.txt
+const robotsContent = robots();
+const robotsPath = `${directoryPath}/public/robots.txt`;
+fs.writeFileSync(robotsPath, robotsContent);
+
 // Create src directory and copy files
 fs.mkdirSync(`${directoryPath}/src`);
 fs.copyFileSync('./templates/src/index.js', `${directoryPath}/src/index.js`);
@@ -71,5 +83,5 @@ console.info('\nInstalling dependencies...');
 // Install necessary dependencies in new directory
 process.chdir(directoryPath);
 exec('npm install react react-dom --save');
-exec('npm install webpack webpack-cli webpack-dev-server sass-loader css-loader style-loader postcss-loader sass mini-css-extract-plugin html-webpack-plugin @babel/core @babel/preset-env babel-loader @babel/runtime core-js@3 @babel/preset-react --save-dev');
+exec('npm install webpack webpack-cli webpack-dev-server sass-loader css-loader style-loader postcss-loader sass mini-css-extract-plugin html-webpack-plugin @babel/core @babel/preset-env babel-loader @babel/runtime core-js@3 @babel/preset-react rimraf --save-dev');
 exec('git init');

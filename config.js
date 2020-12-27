@@ -16,5 +16,19 @@ module.exports = {
     license: 'MIT',
     repositoryType: 'git',
     repositoryURL: 'repository_url'
+  },
+  manifest: {
+    name: 'New Project Name',
+    shortName: 'New Project Short Name',
+    description: 'This is a description for the new project',
+    startURL: '/',
+    icons: '[]',
+    themeColor: '#ffffff',
+    backgroundColor: '#ffffff',
+    display: 'fullscreen',
+    orientation: 'portrait'
+  },
+  meta: {
+    description: 'This is the meta description for the new project'
   }
 }
