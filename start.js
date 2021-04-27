@@ -83,5 +83,5 @@ console.info('\nInstalling dependencies...');
 // Install necessary dependencies in new directory
 process.chdir(directoryPath);
 exec('npm install react react-dom --save');
-exec('npm install webpack webpack-cli webpack-dev-server sass-loader css-loader style-loader postcss-loader sass mini-css-extract-plugin html-webpack-plugin @babel/core @babel/preset-env babel-loader @babel/runtime core-js@3 @babel/preset-react rimraf --save-dev');
+exec('npm install webpack webpack-cli webpack-dev-server sass-loader css-loader style-loader sass mini-css-extract-plugin html-webpack-plugin @babel/core @babel/preset-env babel-loader @babel/runtime core-js@3 @babel/preset-react rimraf --save-dev');
 exec('git init');
