@@ -11,7 +11,8 @@ module.exports = function(name) {
     "clean": "rimraf dist",
     "build": "npm run clean && webpack --mode production",
     "start": "npm run build && webpack serve --mode development",
-    "start-prod": "webpack serve --mode production"
+    "start-prod": "webpack serve --mode production",
+    "express": "node express/index.js"
   },
   "repository": {
     "type": "${config.package.repositoryType}",

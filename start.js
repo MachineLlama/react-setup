@@ -11,6 +11,8 @@ const indexHtml = require('./templates/public/index-html');
 const manifest = require('./templates/public/manifest-json');
 const robots = require('./templates/public/robots-txt');
 const app = require('./templates/src/App');
+const express = require('./templates/express/index');
+const expressTest = require('./templates/express/test');
 
 // arguments
 // 1: directory name, default = config.projectName
@@ -78,10 +80,23 @@ fs.writeFileSync(appPath, appContent);
 // Copy scss file
 fs.copyFileSync('./templates/src/App.scss', `${directoryPath}/src/App.scss`);
 
+// Express file
+fs.mkdirSync(`${directoryPath}/express`);
+const expressContent = express(directoryName);
+const expressPath = `${directoryPath}/express/index.js`;
+fs.writeFileSync(expressPath, expressContent);
+
+// Express test endpoints file
+const testEndpointsContent = expressTest();
+const testEndpointsPath = `${directoryPath}/express/test.js`;
+fs.writeFileSync(testEndpointsPath, testEndpointsContent);
+
 console.info('\nInstalling dependencies...');
 
 // Install necessary dependencies in new directory
 process.chdir(directoryPath);
-exec('npm install react react-dom --save');
-exec('npm install webpack webpack-cli webpack-dev-server sass-loader css-loader style-loader sass mini-css-extract-plugin html-webpack-plugin @babel/core @babel/preset-env babel-loader @babel/runtime core-js@3 @babel/preset-react rimraf --save-dev');
-exec('git init');
+exec('npm i react react-dom express superagent cors', function() {
+  exec('npm i --save-dev webpack webpack-cli webpack-dev-server sass-loader css-loader style-loader sass mini-css-extract-plugin html-webpack-plugin @babel/core @babel/preset-env babel-loader @babel/runtime core-js@3 @babel/preset-react rimraf', function() {
+    exec('git init');
+  });
+});

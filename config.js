@@ -30,5 +30,8 @@ module.exports = {
   },
   meta: {
     description: 'This is the meta description for the new project'
+  },
+  express: {
+    port: 4070
   }
 }
