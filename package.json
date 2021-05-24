@@ -19,5 +19,11 @@
   ],
   "author": "MachineLlama",
   "license": "MIT",
-  "homepage": "https://github.com/MachineLlama/react-setup#readme"
+  "homepage": "https://github.com/MachineLlama/react-setup#readme",
+  "dependencies": {
+    "deep-for-each": "^3.0.0",
+    "fs-extra": "^10.0.0",
+    "lodash": "^4.17.21",
+    "string-replace-all": "^1.0.3"
+  }
 }

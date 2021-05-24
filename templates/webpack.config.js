@@ -1,15 +1,12 @@
-const config = require('../config');
-
-module.exports = function() {
-  return `const path = require('path');
+const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const devMode = process.env.NODE_ENV !== 'production';
 
 const plugins = [
   new HtmlWebpackPlugin({
-    filename: '${config.webpack.htmlFilename}',
-    template: '${config.webpack.htmlTemplate}'
+    filename: '{{webpack.htmlFilename}}',
+    template: '{{webpack.htmlTemplate}}'
   })
 ];
 if (!devMode) {
@@ -18,15 +15,15 @@ if (!devMode) {
 }
 
 module.exports = {
-  entry: '${config.entryFile}',
+  entry: '{{webpack.entryFile}}',
   output: {
-    path: path.resolve(__dirname, '${config.webpack.outputPath}'),
-    filename: '${config.webpack.outputFile}'
+    path: path.resolve(__dirname, '{{webpack.outputPath}}'),
+    filename: '{{webpack.outputFile}}'
   },
   devServer: {
-    contentBase: './${config.webpack.outputPath}',
-    open: ${config.webpack.openOnStart},
-    port: ${config.webpack.port}
+    contentBase: './{{webpack.outputPath}}',
+    open: {{webpack.openOnStart}},
+    port: {{webpack.port}}
   },
   plugins,
   module: {
@@ -48,6 +45,4 @@ module.exports = {
       }
     ]
   }
-}
-`
 }

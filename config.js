@@ -1,37 +1,42 @@
 module.exports = {
-  entryFile: './src/index.js',
   webpack: {
-    outputPath: 'dist',
-    outputFile: 'bundle.js',
-    openOnStart: true,
-    port: 5070,
+    entryFile: './src/index.js',
     htmlFilename: 'index.html',
-    htmlTemplate: './public/index.html'
+    htmlTemplate: './public/index.html',
+    openOnStart: true,
+    outputFile: 'bundle.js',
+    outputPath: 'dist',
+    port: 5070
   },
   package: {
-    projectName: 'new-project',
     author: 'author_name',
-    version: '0.0.1',
     description: 'This is a default description',
     license: 'MIT',
+    projectName: 'new-project',
     repositoryType: 'git',
-    repositoryURL: 'repository_url'
+    repositoryURL: 'repository_url',
+    version: '0.0.1'
   },
   manifest: {
-    name: 'New Project Name',
-    shortName: 'New Project Short Name',
-    description: 'This is a description for the new project',
-    startURL: '/',
-    icons: '[]',
-    themeColor: '#ffffff',
     backgroundColor: '#ffffff',
+    description: 'This is a description for the new project',
     display: 'fullscreen',
-    orientation: 'portrait'
+    icons: '[]',
+    name: 'New Project Name',
+    orientation: 'portrait',
+    shortName: 'New Project Short Name',
+    startURL: '/',
+    themeColor: '#ffffff'
   },
   meta: {
     description: 'This is the meta description for the new project'
   },
   express: {
-    port: 4070
+    port: 4070,
+    url: 'http://localhost'
+  },
+  mongo: {
+    port: '27017',
+    url: 'mongodb://localhost'
   }
 }

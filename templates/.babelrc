@@ -1,5 +1,4 @@
-module.exports = function() {
-  return `{
+{
   "presets": [
     [
       "@babel/preset-react"
@@ -18,5 +17,4 @@ module.exports = function() {
     ]
   ],
   "plugins": ["@babel/plugin-proposal-optional-chaining"]
-}`
 }

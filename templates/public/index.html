@@ -1,13 +1,10 @@
-const config = require('../../config');
-
-module.exports = function(name) {
-  return `<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="${config.meta.description}">
-    <title>${name}</title>
+    <meta name="description" content="This is the meta description for the new project">
+    <title>{{package.projectName}}</title>
   </head>
 
   <body>
@@ -15,5 +12,3 @@ module.exports = function(name) {
     <div id="app"></div>
   </body>
 </html>
-`;
-}

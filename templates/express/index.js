@@ -1,19 +1,21 @@
-const config = require('../../config');
+import express from 'express';
+import cors from 'cors';
 
-module.exports = function(name) {
-  return `const express = require('express');
-const cors = require('cors');
+import config from '../config';
+import testAPI from './test';
+import mongoAPI from './mongo';
+
 const app = express();
-const port = ${config.express.port};
+const expressURL = config.express.url;
+const expressPort = config.express.port;
 
 app.use(cors());
-app.use(express.urlencoded({extended: true}));
-app.use(express.json()) // To parse the incoming requests with JSON payloads
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json()) // To parse incoming requests with JSON payloads
 
-require('./test.js')(app);
+testAPI(app);
+mongoAPI(app);
 
-app.listen(port, () => {
-  console.log('Express server for ${name} listening on http://localhost:${config.express.port}');
+app.listen(expressPort, () => {
+  console.log(`Express server for {{package.projectName}} listening on ${expressURL}:${expressPort}`);
 })
-`;
-}

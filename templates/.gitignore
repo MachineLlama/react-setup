@@ -1,5 +1,4 @@
-module.exports = function() {
-  return `# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
 /node_modules
@@ -12,6 +11,7 @@ module.exports = function() {
 # production
 /build
 /dist
+/server
 
 # misc
 /lambda
@@ -24,5 +24,4 @@ module.exports = function() {
 
 npm-debug.log*
 yarn-debug.log*
-yarn-error.log*`
-}
+yarn-error.log*

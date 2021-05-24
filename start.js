@@ -1,21 +1,15 @@
 const fs = require('fs');
-const { exec } = require('child_process');
+const fse = require('fs-extra');
+const path = require('path');
+const deepForEach = require('deep-for-each');
+const get = require('lodash/get');
+const stringReplaceAll = require('string-replace-all');
+const { execSync } = require('child_process');
 
 const config = require('./config');
-const readme = require('./templates/readme');
-const package = require('./templates/package');
-const webpack = require('./templates/webpack');
-const babelrc = require('./templates/babelrc');
-const gitignore = require('./templates/gitignore');
-const indexHtml = require('./templates/public/index-html');
-const manifest = require('./templates/public/manifest-json');
-const robots = require('./templates/public/robots-txt');
-const app = require('./templates/src/App');
-const express = require('./templates/express/index');
-const expressTest = require('./templates/express/test');
 
 // arguments
-// 1: directory name, default = config.projectName
+// 1: directory name, default = config.package.projectName
 const args = process.argv.slice(2);
 const directoryName = args[0] || config.package.projectName;
 
@@ -25,78 +19,62 @@ console.info('Creating files...');
 const directoryPath = `../${directoryName}`;
 fs.mkdirSync(directoryPath);
 
-// README.md
-const readMeContent = readme(directoryName);
-const readMePath = `${directoryPath}/README.md`;
-fs.writeFileSync(readMePath, readMeContent);
+// Copy all files in templates folder to new project directory
+const templatesDirectory = './templates';
+fse.copySync(templatesDirectory, directoryPath);
+console.log('Succesfully copied files to new directory');
 
-// package.json
-const packageContent = package(directoryName);
-const packagePath = `${directoryPath}/package.json`;
-fs.writeFileSync(packagePath, packageContent);
+// Create a list of all file paths in the new project directory
+const files = [];
+function getFiles(dirPath) {
+  fs.readdirSync(dirPath).forEach(file => {
+    const absolute = path.join(dirPath, file);
+    if (fs.statSync(absolute).isDirectory()) {
+      return getFiles(absolute);
+    }
 
-// webpack.config.js
-const webpackContent = webpack();
-const webpackPath = `${directoryPath}/webpack.config.js`;
-fs.writeFileSync(webpackPath, webpackContent);
+    return files.push(absolute);
+  });
+}
+getFiles(directoryPath);
 
-// .babelrc
-const babelContent = babelrc();
-const babelPath = `${directoryPath}/.babelrc`;
-fs.writeFileSync(babelPath, babelContent);
+// Replace all  default values from config file
+files.forEach(file => {
+  let fileContent = fs.readFileSync(file, 'utf-8');
+  fileContent = replaceDefaults(fileContent);
+  fs.writeFileSync(file, fileContent);
+});
 
-// .gitignore
-const gitignoreContent = gitignore();
-const gitignorePath = `${directoryPath}/.gitignore`;
-fs.writeFileSync(gitignorePath, gitignoreContent);
+function replaceDefaults(text) {
+  let newText = text;
+  deepForEach(config, (value, key, subject, path) => {
+    let newValue = get(config, path);
+    if (path === 'package.projectName') {
+      newValue = directoryName;
+    }
+    newText = stringReplaceAll(newText, `{{${path}}}`, newValue);
+  });
 
-// Create public directory and copy files
-fs.mkdirSync(`${directoryPath}/public`);
+  return newText;
+}
 
-// public/index.html
-const indexHtmlContext = indexHtml(directoryName);
-const indexHtmlPath = `${directoryPath}/public/index.html`;
-fs.writeFileSync(indexHtmlPath, indexHtmlContext);
-
-// public/manifest.json
-const manifestContent = manifest();
-const manifestPath = `${directoryPath}/public/manifest.json`;
-fs.writeFileSync(manifestPath, manifestContent);
-
-// public/robots.txt
-const robotsContent = robots();
-const robotsPath = `${directoryPath}/public/robots.txt`;
-fs.writeFileSync(robotsPath, robotsContent);
-
-// Create src directory and copy files
-fs.mkdirSync(`${directoryPath}/src`);
-fs.copyFileSync('./templates/src/index.js', `${directoryPath}/src/index.js`);
-
-// App.js
-const appContent = app();
-const appPath = `${directoryPath}/src/App.js`;
-fs.writeFileSync(appPath, appContent);
-
-// Copy scss file
-fs.copyFileSync('./templates/src/App.scss', `${directoryPath}/src/App.scss`);
-
-// Express file
-fs.mkdirSync(`${directoryPath}/express`);
-const expressContent = express(directoryName);
-const expressPath = `${directoryPath}/express/index.js`;
-fs.writeFileSync(expressPath, expressContent);
-
-// Express test endpoints file
-const testEndpointsContent = expressTest();
-const testEndpointsPath = `${directoryPath}/express/test.js`;
-fs.writeFileSync(testEndpointsPath, testEndpointsContent);
-
-console.info('\nInstalling dependencies...');
+console.log('Succesfully replaced config defaults');
+console.log('Installing dependencies...');
 
 // Install necessary dependencies in new directory
 process.chdir(directoryPath);
-exec('npm i react react-dom express superagent cors', function() {
-  exec('npm i --save-dev webpack webpack-cli webpack-dev-server sass-loader css-loader style-loader sass mini-css-extract-plugin html-webpack-plugin @babel/core @babel/preset-env babel-loader @babel/runtime core-js@3 @babel/preset-react rimraf', function() {
-    exec('git init');
-  });
-});
+const EXEC_TIMEOUT = 30 * 1000; // 30 seconds
+execSync('yarn add react react-dom express superagent cors mongodb', { timeout: EXEC_TIMEOUT });
+execSync('yarn add --dev @babel/core', { timeout: EXEC_TIMEOUT });
+execSync('yarn add --dev @babel/preset-env', { timeout: EXEC_TIMEOUT });
+execSync('yarn add --dev @babel/runtime', { timeout: EXEC_TIMEOUT });
+execSync('yarn add --dev @babel/preset-react @babel/cli', { timeout: EXEC_TIMEOUT });
+execSync('yarn add --dev babel-loader', { timeout: EXEC_TIMEOUT });
+execSync('yarn add --dev webpack', { timeout: EXEC_TIMEOUT });
+execSync('yarn add --dev webpack-cli', { timeout: EXEC_TIMEOUT });
+execSync('yarn add --dev webpack-dev-server', { timeout: EXEC_TIMEOUT });
+execSync('yarn add --dev sass-loader css-loader style-loader', { timeout: EXEC_TIMEOUT });
+execSync('yarn add --dev sass mini-css-extract-plugin html-webpack-plugin', { timeout: EXEC_TIMEOUT });
+execSync('yarn add --dev core-js@3 rimraf', { timeout: EXEC_TIMEOUT });
+execSync('git init', { timeout: EXEC_TIMEOUT });
+console.log('Finished');

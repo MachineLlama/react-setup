@@ -1,0 +1,29 @@
+{
+  "name": "{{package.projectName}}",
+  "version": "{{package.version}}",
+  "description": "{{package.description}}",
+  "main": "./src/index.js",
+  "scripts": {
+    "dev": "webpack --mode development",
+    "clean": "rimraf dist",
+    "build": "npm run clean && webpack --mode production",
+    "start": "npm run build && webpack serve --mode development",
+    "start-prod": "webpack serve --mode production",
+    "express": "rimraf server && babel ./express --out-dir server && node server/index.js"
+  },
+  "repository": {
+    "type": "{{package.repositoryType}}",
+    "url": "{{package.repositoryURL}}"
+  },
+  "keywords": [
+    "React",
+    "Node",
+    "Express"
+  ],
+  "author": "{{package.author}}",
+  "license": "{{package.license}}",
+  "dependencies": {
+  },
+  "devDependencies": {
+  }
+}
