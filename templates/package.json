@@ -22,6 +22,18 @@
   ],
   "author": "{{package.author}}",
   "license": "{{package.license}}",
+  "husky": {
+    "hooks": {
+      "pre-commit": [
+        "lint-staged"
+      ]
+    }
+  },
+  "lint-staged": {
+    "*": [
+      "prettier --write"
+    ]
+  },
   "dependencies": {
   },
   "devDependencies": {

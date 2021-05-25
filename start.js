@@ -76,5 +76,16 @@ execSync('yarn add --dev webpack-dev-server', { timeout: EXEC_TIMEOUT });
 execSync('yarn add --dev sass-loader css-loader style-loader', { timeout: EXEC_TIMEOUT });
 execSync('yarn add --dev sass mini-css-extract-plugin html-webpack-plugin', { timeout: EXEC_TIMEOUT });
 execSync('yarn add --dev core-js@3 rimraf', { timeout: EXEC_TIMEOUT });
+execSync('yarn add --dev lint-staged@10.5.4 prettier@2.2.1 husky@4', { timeout: EXEC_TIMEOUT });
+console.log('Succesfully installed dependencies');
+
+// init git with main branch
+console.log('Initializing git...')
+execSync('git config --global init.defaultBranch main', { timeout: EXEC_TIMEOUT });
 execSync('git init', { timeout: EXEC_TIMEOUT });
+
+// initial commit
+execSync('git add .', { timeout: EXEC_TIMEOUT });
+execSync('git commit -m "init"', { timeout: EXEC_TIMEOUT });
+
 console.log('Finished');
