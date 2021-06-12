@@ -1,6 +1,6 @@
-# MachineLlama/React-Setup
+# MachineLlama/MERN-Setup
 
-A node script for quickly creating a React app using Webpack, Babel, Sass, Express, and MongoDB.
+A node script for quickly creating a functional MERN stack application. Uses Mongo, Express, React, Node, Webpack, Babel, Sass, and Prettier.
 
 To run: `yarn install` and then `node start` or `node start <project-name>`
 - Node and Yarn are required prerequisites
