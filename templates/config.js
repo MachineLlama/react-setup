@@ -6,5 +6,8 @@ module.exports = {
   mongo: {
     port: {{mongo.port}},
     url: '{{mongo.url}}'
+  },
+  web: {
+    port: {{webpack.port}}
   }
 }

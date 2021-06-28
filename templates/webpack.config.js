@@ -2,6 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const devMode = process.env.NODE_ENV !== 'production';
+const config = require('./config');
 
 const plugins = [
   new HtmlWebpackPlugin({
@@ -23,7 +24,7 @@ module.exports = {
   devServer: {
     contentBase: './{{webpack.outputPath}}',
     open: {{webpack.openOnStart}},
-    port: {{webpack.port}}
+    port: config.web.port
   },
   plugins,
   module: {
