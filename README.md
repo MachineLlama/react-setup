@@ -9,7 +9,25 @@ To run: `yarn install` and then `node start` or `node start <project-name>`
 - The newly created App can be run with `yarn run start` (on port 5070 by default)
 - An Express server can be run by running `yarn run express` (on port 4070 by default)
 
-Default values for setup can be changed in `config.js`:
+## Features
+- React
+  - Functional component examples
+  - React Routing
+  - Example calls to backend API
+- SASS
+- Mongo
+- Express
+  - Example GET and POST endpoints
+  - Example calls to Mongo
+- Webpack
+  - JS and SASS compilation
+  - file resolution
+- Babel
+  - ES compilation
+- Prettier
+  - Auto run on commit
+
+## Config (defaults can be changed in `config.js`)
 ```js
 config = {
   entryFile: './src/index.js',
