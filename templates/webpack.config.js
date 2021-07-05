@@ -19,12 +19,19 @@ module.exports = {
   entry: '{{webpack.entryFile}}',
   output: {
     path: path.resolve(__dirname, '{{webpack.outputPath}}'),
-    filename: '{{webpack.outputFile}}'
+    filename: '{{webpack.outputFile}}',
+    publicPath: '/'
+  },
+  resolve: {
+    alias: {
+      colors: path.resolve(__dirname, 'src/styles/colors.scss')
+    }
   },
   devServer: {
     contentBase: './{{webpack.outputPath}}',
     open: {{webpack.openOnStart}},
-    port: config.web.port
+    port: config.web.port,
+    historyApiFallback: true
   },
   plugins,
   module: {

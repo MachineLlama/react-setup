@@ -1,4 +1,4 @@
-@import "styles/colors";
+@import "colors";
 
 html {
   background-color: $black;
@@ -9,4 +9,21 @@ html {
   text-align: center;
   padding-top: 20px;
   font-size: 20px;
+}
+
+nav {
+  display: flex;
+
+  ul {
+    display: flex;
+    margin-top: 0;
+
+    li {
+      margin-right: 30px;
+    }
+  }
+
+  a {
+    color: white;
+  }
 }

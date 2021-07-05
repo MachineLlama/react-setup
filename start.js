@@ -65,6 +65,7 @@ console.log('Installing dependencies...');
 process.chdir(directoryPath);
 const EXEC_TIMEOUT = 30 * 1000; // 30 seconds
 execSync('yarn add react react-dom express superagent cors mongodb', { timeout: EXEC_TIMEOUT });
+execSync('yarn add react-router-dom', { timeout: EXEC_TIMEOUT });
 execSync('yarn add --dev @babel/core', { timeout: EXEC_TIMEOUT });
 execSync('yarn add --dev @babel/preset-env', { timeout: EXEC_TIMEOUT });
 execSync('yarn add --dev @babel/runtime', { timeout: EXEC_TIMEOUT });

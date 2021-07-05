@@ -1,0 +1,55 @@
+@import "colors";
+
+.rest-container {
+  text-align: left;
+  padding-left: 20px;
+
+  .details-container {
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  .home-button {
+    background-color: $green;
+    border: none;
+    color: white;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 16px;
+    padding: 15px 30px;
+    text-align: center;
+    text-decoration: none;
+    width: 175px;
+
+    &:hover {
+      font-weight: bold;
+    }
+  }
+
+  table {
+    th {
+      width: 200px;
+      padding: 5px;
+
+      &.small {
+        width: 100px;
+      }
+
+      &.medium {
+        width: 330px;
+      }
+
+      &.large {
+        width: 400px;
+      }
+    }
+
+    tr {
+      outline: solid thin;
+    }
+
+    td {
+      padding: 10px 5px;
+    }
+  }
+}
