@@ -21,7 +21,7 @@ To run: `yarn install` and then `node start` or `node start <project-name>`
   - Example calls to Mongo
 - Webpack
   - JS and SASS compilation
-  - file resolution
+  - File resolution alias example
 - Babel
   - ES compilation
 - Prettier
